@@ -47,12 +47,8 @@ const libs = getAllLibs().map(path => {
 });
 
 let result = {};
-
-const writeStream = fs.createWriteStream('./result.xjson');
-
-writeStream.on('error', function(err) {
-  console.log(err);
-});
+const fName = 'result.json';
+fs.writeFileSync(fName, `[`);
 
 for (const { path, canRunTest } of libs) {
   if (canRunTest) {
@@ -68,7 +64,7 @@ for (const { path, canRunTest } of libs) {
       path,
       speed: e - s,
       code,
-      stdout,
+      stdout: code === 0 ? '' : stdout,
     };
   } else {
     result = {
@@ -77,9 +73,9 @@ for (const { path, canRunTest } of libs) {
     };
   }
 
-  writeStream.write(JSON.stringify(result));
+  fs.appendFileSync(fName, `${JSON.stringify(result, null, 2)},`, 'utf8');
 }
 
-writeStream.end();
+fs.writeFileSync(fName, `]`);
 
 shell.exit(0);
