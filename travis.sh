@@ -1,11 +1,9 @@
 #!/bin/sh
 #set -e
 
-cd definitions && \
-yarn install && \
-yarn test && \
-cd ../cli && \
+cd cli && \
 yarn && \
-yarn run flow && \
-node dist/cli.js validate-defs ../definitions && \
-node dist/cli.js run-tests --onlyChanged
+cd ../state && \
+yarn && \
+cd .. && \
+node state/check.js
