@@ -3,6 +3,7 @@
 
 cd cli && \
 yarn && \
+yarn build && \
 cd ../state && \
 yarn && \
 cd .. && \
