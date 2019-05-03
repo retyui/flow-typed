@@ -76,6 +76,6 @@ for (const { path, canRunTest } of libs) {
   fs.appendFileSync(fName, `${JSON.stringify(result, null, 2)},`, 'utf8');
 }
 
-fs.writeFileSync(fName, `]`);
+fs.appendFileSync(fName, `]`);
 
 shell.exit(0);
