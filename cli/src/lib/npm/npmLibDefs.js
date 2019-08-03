@@ -4,6 +4,7 @@ import {
   ensureCacheRepo,
   getCacheRepoDir,
   verifyCLIVersion,
+  CACHE_REPO_EXPIRY,
 } from '../cacheRepoUtils';
 
 import {getSignedCodeVersion, verifySignedCode} from '../codeSign';
@@ -179,8 +180,8 @@ async function extractLibDefsFromNpmPkgDir(
   return libDefs;
 }
 
-async function getCacheNpmLibDefs() {
-  await ensureCacheRepo();
+async function getCacheNpmLibDefs(cacheExpiry) {
+  await ensureCacheRepo(cacheExpiry);
   await verifyCLIVersion();
   return getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
 }
@@ -333,8 +334,9 @@ export async function findNpmLibDef(
   pkgName: string,
   pkgVersion: string,
   flowVersion: FlowVersion,
+  useCacheUntil: number = CACHE_REPO_EXPIRY,
 ): Promise<null | NpmLibDef> {
-  const libDefs = await getCacheNpmLibDefs();
+  const libDefs = await getCacheNpmLibDefs(useCacheUntil);
   const filteredLibDefs = filterLibDefs(libDefs, {
     type: 'exact',
     pkgName,
@@ -406,8 +408,8 @@ export async function getInstalledNpmLibDefs(
               flowVerMatches == null
                 ? matches[3]
                 : flowVerMatches[3] == null
-                  ? flowVerMatches[2]
-                  : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
+                ? flowVerMatches[2]
+                : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
             const flowDirStr = `flow_${flowVerStr}`;
             const flowVer =
               flowVerMatches == null

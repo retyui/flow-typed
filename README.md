@@ -5,6 +5,7 @@
 />
 
 [![Travis](https://img.shields.io/travis/flow-typed/flow-typed.svg)](https://travis-ci.org/flow-typed/flow-typed) [![npm](https://img.shields.io/npm/dm/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
+[![Join the chat at https://discordapp.com/invite/8ezwRUK](https://img.shields.io/discord/539606376339734558.svg?label=discord&logo=discord&logoColor=white)](https://discordapp.com/invite/8ezwRUK)
 
 `flow-typed` is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions) of third-party
 [library interface definitions](https://flow.org/en/docs/libdefs)
@@ -107,6 +108,18 @@ on your local filesystem. Usually, the cache will automatically be updated after
 a short grace period during a libdef installation, but sometimes it is useful to
 do this update manually. Use this command if you want to download the most
 recent definitions into the cache for yourself.
+
+##### `flow-typed create-stub package-specification [--typescript]`
+
+Creates `any`-typed libdef that you can fill in.
+
+If the `--typescript` flag was specified, TypeScript definition would be converted to flow-typed libdef format if possible.
+Please report any issues that you have encountered to [flowgen](https://github.com/joarwilk/flowgen/issues) repository.
+
+[flowgen](https://github.com/joarwilk/flowgen) supports most of the TypeScript syntax, however, in some cases manual changes may be needed before use.
+You can check out supported syntax constructs in flowgen's [&ldquo;The state of converter&rdquo; section](https://github.com/joarwilk/flowgen#the-state-of-the-converter).
+
+After you have edited these files, consider [contributing](CONTRIBUTING.md) them back to flow-typed.
 
 ## Active Maintenance Team
 
