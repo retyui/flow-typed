@@ -26,7 +26,7 @@ const inRange = path => {
 
 const getAllLibs = () => {
   const { code, stdout } = shell.exec(
-    `find definitions/ -type d -name "flow_*"`
+    `find definitions/npm/ -type d -name "flow_*"`
   );
 
   if (code === 0) {

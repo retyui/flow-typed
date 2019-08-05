@@ -1,12 +1,4 @@
-const a100 = require('../result100');
-const a200 = require('../result200');
-const a300 = require('../result300');
-const a400 = require('../result400');
-const a500 = require('../result500');
-const a600 = require('../result600');
-const a700 = require('../result700');
-const a800 = require('../result800');
-const a900 = require('../result900');
+const all = require('../result');
 
 function compare(a, b) {
   if (a.path < b.path) {
@@ -69,17 +61,6 @@ ${strtss.join('\n')}
 `;
 };
 
-const all = [
-  ...a100,
-  ...a200,
-  ...a300,
-  ...a400,
-  ...a500,
-  ...a600,
-  ...a700,
-  ...a800,
-  ...a900,
-];
 
 const getStats = arr => {
   const stat = {
